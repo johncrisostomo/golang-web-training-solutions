@@ -1,10 +1,9 @@
 package main
 
 import (
-    "log"
-      "os"
-        "text/template"
-
+  "log"
+  "os"
+  "text/template"
 )
 
 type course struct {
@@ -73,7 +72,7 @@ func main() {
     },
   }
 
-  err := tpl.Execute(os.Stdout, nil)
+  err := tpl.Execute(os.Stdout, years)
   if err != nil {
     log.Fatalln(err)
   }
