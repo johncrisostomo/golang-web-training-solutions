@@ -1,0 +1,20 @@
+<!doctype html>
+  <head>Hands on 2</head>
+  <body>
+    {{range .}}
+    <h1>{{.Name}}</h1>
+    <h2>{{.Address}}</h2>
+    <h3>{{.Region}}</h3>
+    {{ range .Meals }}
+      <h1>{{.Name}}</h1>
+      {{ range .Items }} 
+        <section>
+          <h2>{{.Name}}</h2>
+          <p>{{.Description}}</p>
+          <span>{{.Price}}</span>
+        </section>
+      {{ end }}
+    {{ end }}
+    {{end}}
+  </body>
+</html>
