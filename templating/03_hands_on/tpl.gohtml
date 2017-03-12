@@ -1,0 +1,13 @@
+<!doctype html>
+  <head>Hands on 2</head>
+  <body>
+    {{ range . }}
+    <section>
+      <h1>{{.Name}}</h1>
+      <span>{{.Meal}}</span>
+      <span>{{.Price}}</span>
+      <p>{{.Description}}</p>
+    </section>
+    {{ end }}
+  </body>
+</html>
