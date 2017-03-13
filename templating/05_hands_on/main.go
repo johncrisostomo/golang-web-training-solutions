@@ -3,13 +3,20 @@ package main
 import (
   "os"
   "log"
-  "bufio"
-  "fmt"
+  "encoding/csv"
+  "html/template"
 )
+
 
 type table struct {
   Date string
-  Open float32
+  Open string 
+}
+
+var tpl *template.Template
+
+func init() {
+  tpl = template.Must(template.ParseFiles("tpl.gohtml"))
 }
 
 func main() {
@@ -18,23 +25,21 @@ func main() {
     log.Fatalln(err)
   }
   defer file.Close()
-  
-  reader := bufio.NewReader(file)
-  scanner := bufio.NewScanner(reader)
 
-  scanner.Split(bufio.ScanLines)
-
-  lines := []string{}
-
-  for scanner.Scan() {
-    lines = append(lines, scanner.Text())
+  r := csv.NewReader(file)
+  records, err := r.ReadAll()
+  if err != nil {
+    log.Fatalln(err)
   }
 
   data := []table{}
 
-  for i := 1; i < len(lines); i++ {
-    
+  for i := 1; i < len(records); i++ {
+    data = append(data, table{ records[i][0], records[i][1] })
   }
 
-  fmt.Printf("%s\n", lines[0])
+  err = tpl.Execute(os.Stdout, data)
+  if err != nil {
+    log.Fatalln(err)
+  }
 }
