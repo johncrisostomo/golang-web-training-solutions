@@ -31,5 +31,6 @@ func handle(conn net.Conn) {
   line := scanner.Text()
   msg := strings.Fields(line)
   fmt.Println("Request method is", msg[0])
+  fmt.Println("URI is", msg[1])
   conn.Close()
 }
